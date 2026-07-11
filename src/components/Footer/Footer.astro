@@ -1,0 +1,26 @@
+---
+import './Footer.css';
+---
+
+<footer id="order" class="footer">
+	<p class="section-label">Final signal</p>
+	<h2 class="footer-title">One board. Your signal.</h2>
+	<p class="footer-sub mono">THOCK/01 · <span data-footer-count>00</span> strokes · generated live</p>
+
+	<div class="footer-replay">
+		<button class="footer-cta mono" type="button" data-replay-soundprint>
+			<span data-replay-label>Play factory trace</span><span aria-hidden="true">↵</span>
+		</button>
+		<p class="footer-note mono">No samples. No tracking. Just your input, synthesized.</p>
+		<p class="footer-status mono" role="status" aria-live="polite"></p>
+	</div>
+
+	<p class="footer-credit mono">
+		Built with Astro + GSAP for the
+		<a href="https://codetv-gsap-cloud.webflow.io/">Webflow × GSAP Challenge</a>
+	</p>
+</footer>
+
+<script>
+	import './Footer.js';
+</script>

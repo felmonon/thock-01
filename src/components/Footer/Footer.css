@@ -1,0 +1,111 @@
+.footer {
+  position: relative;
+  padding: var(--space-8) var(--space-5) var(--space-6);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  overflow: hidden;
+}
+
+.footer::before {
+  content: "THOCK";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  display: grid;
+  place-items: center;
+  color: rgb(255 255 255 / 0.018);
+  font-size: clamp(8rem, 28vw, 28rem);
+  font-weight: 700;
+  letter-spacing: -0.08em;
+  pointer-events: none;
+}
+
+.footer-title {
+  max-width: 14ch;
+  font-size: clamp(2.6rem, 7vw, 6.5rem);
+  line-height: 0.96;
+  letter-spacing: -0.045em;
+  margin: var(--space-3) 0 var(--space-2);
+}
+
+.footer-sub {
+  color: var(--ink-dim);
+  font-size: var(--font-size-sm);
+  margin: 0;
+}
+
+.footer-replay {
+  width: min(100%, 28rem);
+  margin-top: var(--space-5);
+}
+
+.footer-cta {
+  width: 100%;
+  min-height: 54px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  background: var(--accent);
+  color: var(--surface-0);
+  border: 0;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 0 var(--accent-down);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out);
+}
+
+.footer-cta:hover {
+  background: var(--accent-strong);
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--accent-down);
+}
+
+.footer-cta:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 var(--accent-down);
+}
+
+.footer-note,
+.footer-status {
+  margin: var(--space-3) 0 0;
+  color: var(--ink-dim);
+  font-size: 0.66rem;
+  letter-spacing: 0.05em;
+}
+
+.footer-status {
+  min-height: 1.5em;
+  color: var(--accent);
+}
+
+.footer-credit {
+  margin: var(--space-7) 0 0;
+  color: var(--ink-dim);
+  font-size: var(--font-size-xs);
+}
+
+.footer-credit a {
+  color: var(--ink);
+}
+
+@media (max-width: 640px) {
+  .footer {
+    padding: var(--space-7) var(--space-4) var(--space-5);
+  }
+
+  .footer-cta {
+    justify-content: center;
+  }
+}

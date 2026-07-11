@@ -1,0 +1,65 @@
+---
+import './Soundprint.css';
+import {
+	buildSoundprintPath,
+	calibrationEvents,
+} from '../../lib/soundprint.js';
+
+const factoryPath = buildSoundprintPath(calibrationEvents);
+---
+
+<section id="soundprint" class="soundprint" aria-labelledby="soundprint-title">
+	<div class="soundprint-heading">
+		<div>
+			<p class="section-label">Your soundprint</p>
+			<h2 id="soundprint-title" class="soundprint-title">This is what your hands sound like.</h2>
+		</div>
+		<p class="soundprint-intro mono">
+			Every input maps its timing—and touch pressure when available—into a different trace.<br />Type above or audition a switch to rewrite it.
+		</p>
+	</div>
+
+	<div class="soundprint-console">
+		<div class="soundprint-console-bar mono">
+			<span class="soundprint-state"><i aria-hidden="true"></i><span data-soundprint-source>Factory calibration</span></span>
+			<span><b data-soundprint-count>00</b> inputs</span>
+			<span data-soundprint-profile>Tactile profile</span>
+		</div>
+
+		<div class="soundprint-screen">
+			<svg
+				class="soundprint-graph"
+				viewBox="0 0 1200 320"
+				preserveAspectRatio="none"
+				role="img"
+				aria-label="A live acoustic force trace generated from your keyboard and touch input"
+			>
+				<defs>
+					<pattern id="soundprint-grid" width="75" height="40" patternUnits="userSpaceOnUse">
+						<path d="M 75 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="1" />
+					</pattern>
+					<linearGradient id="soundprint-stroke" x1="0" x2="1">
+						<stop offset="0" stop-color="#d98c0f" />
+						<stop offset="0.5" stop-color="#ffcf7c" />
+						<stop offset="1" stop-color="#ffb340" />
+					</linearGradient>
+				</defs>
+				<rect class="soundprint-grid" width="1200" height="320" fill="url(#soundprint-grid)" />
+				<line class="soundprint-axis" x1="0" y1="160" x2="1200" y2="160" />
+				<path class="soundprint-trace" data-soundprint-path d={factoryPath} />
+				<rect class="soundprint-scan" data-soundprint-scan x="0" y="0" width="3" height="320" />
+			</svg>
+		</div>
+
+		<div class="soundprint-console-foot mono">
+			<div class="soundprint-keys" data-soundprint-keys aria-hidden="true">
+				{['T', 'H', 'O', 'C', 'K'].map((key) => <span>{key}</span>)}
+			</div>
+			<p data-soundprint-status role="status" aria-live="polite">Factory trace armed. Make it yours.</p>
+		</div>
+	</div>
+</section>
+
+<script>
+	import './Soundprint.js';
+</script>

@@ -1,0 +1,240 @@
+.soundprint {
+  position: relative;
+  padding: var(--space-8) var(--space-5);
+  background:
+    radial-gradient(circle at 50% 55%, rgb(255 179 64 / 0.08), transparent 42%),
+    var(--surface-0);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.soundprint::before {
+  content: "SIGNAL";
+  position: absolute;
+  top: 5%;
+  right: -0.04em;
+  color: rgb(255 255 255 / 0.018);
+  font-size: clamp(8rem, 26vw, 27rem);
+  font-weight: 700;
+  letter-spacing: -0.08em;
+  line-height: 0.8;
+  pointer-events: none;
+}
+
+.soundprint-heading,
+.soundprint-console {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 76rem);
+  margin-inline: auto;
+}
+
+.soundprint-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+.soundprint-heading .section-label {
+  margin: 0;
+}
+
+.soundprint-title {
+  max-width: 12ch;
+  margin: var(--space-3) 0 0;
+  font-size: clamp(3rem, 7.5vw, 7.2rem);
+  line-height: 0.92;
+  letter-spacing: -0.055em;
+}
+
+.soundprint-intro {
+  max-width: 27rem;
+  margin: 0 0 var(--space-2);
+  color: var(--ink-dim);
+  font-size: var(--font-size-xs);
+  line-height: 1.8;
+  text-align: right;
+}
+
+.soundprint-console {
+  background: rgb(10 10 12 / 0.88);
+  border: 1px solid #3a3429;
+  border-radius: var(--radius-md);
+  box-shadow:
+    0 2.5rem 7rem rgb(0 0 0 / 0.42),
+    inset 0 1px 0 rgb(255 255 255 / 0.035);
+  overflow: hidden;
+}
+
+.soundprint-console-bar,
+.soundprint-console-foot {
+  min-height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  color: var(--ink-dim);
+  background: rgb(19 19 23 / 0.86);
+  font-size: 0.64rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.soundprint-console-bar {
+  border-bottom: 1px solid var(--border);
+}
+
+.soundprint-console-bar b {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.soundprint-state {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--accent);
+}
+
+.soundprint-state i {
+  width: 0.45rem;
+  aspect-ratio: 1;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 0.8rem rgb(255 179 64 / 0.75);
+}
+
+.soundprint-screen {
+  position: relative;
+  min-height: clamp(15rem, 31vw, 25rem);
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(180deg, rgb(255 179 64 / 0.025), transparent 28%),
+    #0d0d10;
+}
+
+.soundprint-graph {
+  width: 100%;
+  height: clamp(15rem, 31vw, 25rem);
+  display: block;
+  overflow: visible;
+}
+
+.soundprint-grid {
+  color: rgb(255 255 255 / 0.045);
+}
+
+.soundprint-axis {
+  stroke: rgb(255 179 64 / 0.2);
+  stroke-width: 1;
+  stroke-dasharray: 8 12;
+}
+
+.soundprint-trace {
+  fill: none;
+  stroke: url(#soundprint-stroke);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 12px rgb(255 179 64 / 0.28));
+}
+
+.soundprint-scan {
+  fill: var(--accent);
+  opacity: 0;
+  filter: drop-shadow(0 0 12px var(--accent));
+}
+
+.soundprint-console-foot {
+  min-height: 4rem;
+  border-top: 1px solid var(--border);
+  text-transform: none;
+}
+
+.soundprint-console-foot p {
+  margin: 0;
+  text-align: right;
+}
+
+.soundprint-keys {
+  min-width: 0;
+  display: flex;
+  gap: var(--space-2);
+  overflow: hidden;
+}
+
+.soundprint-keys span {
+  min-width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  color: var(--ink);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 2px 0 #30313a;
+}
+
+.soundprint-keys span:last-child {
+  color: var(--surface-0);
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 2px 0 var(--accent-down);
+}
+
+@media (max-width: 720px) {
+  .soundprint {
+    padding: var(--space-7) var(--space-4);
+  }
+
+  .soundprint-heading {
+    display: block;
+    margin-bottom: var(--space-5);
+  }
+
+  .soundprint-title {
+    max-width: 10ch;
+    font-size: clamp(2.8rem, 14vw, 4.8rem);
+  }
+
+  .soundprint-intro {
+    margin-top: var(--space-4);
+    text-align: left;
+  }
+
+  .soundprint-console-bar {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-2);
+  }
+
+  .soundprint-console-bar > :last-child {
+    grid-column: 1 / -1;
+  }
+
+  .soundprint-console-foot {
+    display: block;
+  }
+
+  .soundprint-console-foot p {
+    margin-top: var(--space-3);
+    text-align: left;
+  }
+
+  .soundprint-keys {
+    padding-bottom: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .soundprint-state i {
+    box-shadow: none;
+  }
+}

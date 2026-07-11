@@ -1,24 +1,65 @@
 ---
 import './Hero.css';
+import {
+	buildSoundprintPath,
+	calibrationEvents,
+} from '../../lib/soundprint.js';
+
+const letters = ['T', 'H', 'O', 'C', 'K'];
+const factoryPreviewPath = buildSoundprintPath(calibrationEvents, 600, 100);
 ---
 
 <header class="hero">
-	<h1 id="title">Astro &times; GSAP</h1>
-	<p id="subtitle">Every plugin registered. Scroll, drag, move.</p>
-	<div class="hero-actions">
-		<a
-			class="hero-deploy"
-			href="https://webflow.com/dashboard/cloud/deploy?repo=https://github.com/webflow-examples/astro-gsap"
-		>
-			<img src="https://webflow.com/img/deploy-dark.svg" alt="Deploy to Webflow" />
-		</a>
-		<a class="hero-cheatsheet" href="https://gsap.com/cheatsheet/">
-			GSAP Cheatsheet <span aria-hidden="true">👀</span>
-		</a>
-		<a class="hero-cheatsheet" href="https://docs.astro.build/">
-			Astro Docs <span aria-hidden="true">🚀</span>
-		</a>
+	<div class="hero-grid" aria-hidden="true"></div>
+	<nav class="hero-nav">
+		<span class="hero-logo mono">THOCK/01</span>
+		<div class="hero-nav-links mono">
+			<a href="#anatomy">Anatomy</a>
+			<a href="#switches">Switches</a>
+			<a href="#soundprint">Soundprint</a>
+		</div>
+	</nav>
+
+	<div class="hero-stage">
+		<p class="section-label">Mechanical keyboard, mark one</p>
+		<h1 class="hero-title" aria-label="THOCK interactive keyboard">
+			{letters.map((letter) => (
+				<button
+					class="keycap"
+					type="button"
+					data-key={letter}
+					aria-label={`Play the ${letter} key and add it to your soundprint`}
+				>
+					<span aria-hidden="true">{letter}</span>
+				</button>
+			))}
+		</h1>
+		<p id="hero-subtitle" class="mono">The sound your desk has been waiting for.</p>
+		<div class="hero-interaction mono">
+			<p class="hero-hint">Type a key or tap a cap. Build your soundprint.</p>
+			<button class="sound-toggle" type="button" aria-pressed="true">
+				<span class="sound-dot" aria-hidden="true"></span>
+				Sound <strong data-sound-state>armed</strong>
+			</button>
+		</div>
+		<div class="hero-soundprint mono" aria-hidden="true">
+			<div><span data-hero-soundprint-source>Factory trace</span><strong data-hero-soundprint-count>00</strong></div>
+			<svg viewBox="0 0 600 100" preserveAspectRatio="none">
+				<line x1="0" y1="50" x2="600" y2="50"></line>
+				<path data-hero-soundprint-path d={factoryPreviewPath}></path>
+			</svg>
+		</div>
 	</div>
+
+	<div class="hero-telemetry mono" role="group" aria-label="THOCK/01 specifications">
+		<div><span>Layout</span><strong>75%</strong></div>
+		<div><span>Mass</span><strong>2.1 kg</strong></div>
+		<div><span>Angle</span><strong>6.5°</strong></div>
+		<div><span>Profile</span><strong data-profile-display>Tactile</strong></div>
+		<a href="#anatomy">Scroll to disassemble <span aria-hidden="true">↓</span></a>
+	</div>
+
+	<div class="hero-impact" aria-hidden="true"></div>
 </header>
 
 <script>

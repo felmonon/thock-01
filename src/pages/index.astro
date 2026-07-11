@@ -1,10 +1,11 @@
 ---
 import '../styles/global.css';
+import Progress from '../components/Progress/Progress.astro';
 import Hero from '../components/Hero/Hero.astro';
-import Boxes from '../components/Boxes/Boxes.astro';
-import MotionPath from '../components/MotionPath/MotionPath.astro';
-import Physics from '../components/Physics/Physics.astro';
-import ScrollPin from '../components/ScrollPin/ScrollPin.astro';
+import Anatomy from '../components/Anatomy/Anatomy.astro';
+import Switches from '../components/Switches/Switches.astro';
+import Soundprint from '../components/Soundprint/Soundprint.astro';
+import Footer from '../components/Footer/Footer.astro';
 ---
 
 <html lang="en">
@@ -12,14 +13,54 @@ import ScrollPin from '../components/ScrollPin/ScrollPin.astro';
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
+		<meta name="theme-color" content="#0a0a0c" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro + GSAP</title>
+		<meta
+			name="description"
+			content="THOCK/01 — a 75% mechanical keyboard with a sound profile worth a landing page. Built with Astro + GSAP."
+		/>
+		<meta property="og:title" content="THOCK/01 — Feel the sound" />
+		<meta
+			property="og:description"
+			content="Disassemble it. Tune the switch. Press any key. A tactile mechanical-keyboard concept built with Astro and GSAP."
+		/>
+		<meta property="og:type" content="website" />
+		<meta property="og:image" content="/og-thock.png" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content="Five oversized THOCK keycaps above a live amber soundprint trace" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="THOCK/01 — Feel the sound" />
+		<meta
+			name="twitter:description"
+			content="Type or tap to create and replay your own mechanical-keyboard soundprint."
+		/>
+		<meta name="twitter:image" content="/og-thock.png" />
+		<title>THOCK/01 — The sound your desk has been waiting for</title>
+		<link
+			rel="preload"
+			href="/fonts/space-grotesk-latin.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+		<link
+			rel="preload"
+			href="/fonts/jetbrains-mono-latin.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
 	</head>
-	<body>
-		<Hero />
-		<Boxes />
-		<MotionPath />
-		<Physics />
-		<ScrollPin />
+	<body id="top">
+		<a class="skip-link mono" href="#anatomy">Skip to product details</a>
+		<Progress />
+		<main>
+			<Hero />
+			<Anatomy />
+			<Switches />
+			<Soundprint />
+		</main>
+		<Footer />
 	</body>
 </html>

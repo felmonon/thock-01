@@ -1,0 +1,80 @@
+---
+import './Switches.css';
+
+const switches = [
+	{
+		name: 'Thock 55T',
+		profile: 'tactile',
+		type: 'Tactile',
+		force: '55g',
+		sound: 'Deep · Rounded',
+		copy: 'A measured bump, then a low case note. The default THOCK/01 tune.',
+		// Force curve: tactile bump mid-travel
+		curve: 'M4 56 C 20 50, 28 22, 40 26 C 50 30, 54 40, 62 38 C 78 34, 88 18, 116 10',
+	},
+	{
+		name: 'Glide 45L',
+		profile: 'linear',
+		type: 'Linear',
+		force: '45g',
+		sound: 'Smooth · Muted',
+		copy: 'No bump, no click—just a clean travel path and a soft bottom-out.',
+		curve: 'M4 56 C 30 48, 70 30, 116 10',
+	},
+	{
+		name: 'Snap 60C',
+		profile: 'clicky',
+		type: 'Clicky',
+		force: '60g',
+		sound: 'Crisp · Bright',
+		copy: 'A sharp jacket click above the aluminum body note. Impossible to ignore.',
+		curve: 'M4 56 C 18 52, 30 44, 38 40 L 44 20 C 60 18, 90 14, 116 8',
+	},
+];
+---
+
+<section id="switches" class="switches">
+	<div class="switches-heading">
+		<div>
+			<p class="section-label">Switches</p>
+			<h2 class="switches-title">Pick your sound profile.</h2>
+		</div>
+		<p class="switches-hint mono">Sound is synthesized live.<br />No samples. No downloads.</p>
+	</div>
+
+	<div class="switch-grid">
+		{switches.map((sw, index) => (
+			<article class:list={['switch-card', { 'is-selected': index === 0 }]} data-profile={sw.profile}>
+				<div class="switch-card-head">
+					<div>
+						<span class="switch-number mono">0{index + 1}</span>
+						<h3 class="switch-name">{sw.name}</h3>
+					</div>
+					<span class="switch-type mono">{sw.type}</span>
+				</div>
+				<svg class="force-curve" viewBox="0 0 120 64" aria-hidden="true">
+					<line class="curve-axis" x1="4" y1="56" x2="116" y2="56" />
+					<line class="curve-axis" x1="4" y1="56" x2="4" y2="6" />
+					<path class="curve-path" d={sw.curve} />
+				</svg>
+				<dl class="switch-specs mono">
+					<div><dt>Actuation</dt><dd>{sw.force}</dd></div>
+					<div><dt>Sound</dt><dd>{sw.sound}</dd></div>
+				</dl>
+				<p class="switch-copy">{sw.copy}</p>
+				<button
+					class="switch-audition mono"
+					type="button"
+					data-audition={sw.profile}
+					aria-pressed={index === 0 ? 'true' : 'false'}
+				>
+					<span>Audition {sw.type}</span><kbd>↵</kbd>
+				</button>
+			</article>
+		))}
+	</div>
+</section>
+
+<script>
+	import './Switches.js';
+</script>

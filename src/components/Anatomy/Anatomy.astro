@@ -1,0 +1,55 @@
+---
+import './Anatomy.css';
+
+const layers = [
+	{ id: 'keycaps', name: 'PBT Keycaps', note: 'Double-shot, 1.4mm walls' },
+	{ id: 'switches', name: 'Switch Plate', note: 'FR4, half-plate flex cuts' },
+	{ id: 'pcb', name: 'Hot-swap PCB', note: '5-pin sockets, south-facing' },
+	{ id: 'foam', name: 'Silicone Dampener', note: 'Kills ping, keeps thock' },
+	{ id: 'case', name: 'CNC Alu Case', note: '6063, 2.1kg, 6.5° typing angle' },
+];
+
+// 5 rows of a keyboard, keys per row
+const rows = [14, 14, 13, 12, 8];
+---
+
+<section id="anatomy" class="anatomy">
+	<div class="anatomy-pin">
+		<div class="anatomy-copy">
+			<p class="section-label">Anatomy</p>
+			<h2 class="anatomy-title">Five layers.<br />Zero rattle.</h2>
+			<p class="anatomy-instruction mono">Scroll to pull the board apart.</p>
+			<ul class="anatomy-legend mono">
+				{layers.map((layer, i) => (
+					<li class="legend-item" data-layer={layer.id}>
+						<span class="legend-index">0{i + 1}</span>
+						<span class="legend-name">{layer.name}</span>
+						<span class="legend-note">{layer.note}</span>
+					</li>
+				))}
+			</ul>
+		</div>
+
+		<div class="anatomy-stage" aria-hidden="true">
+			<div class="board">
+				<div class="board-layer layer-keycaps" data-layer="keycaps">
+					{rows.map((count) => (
+						<div class="key-row">
+							{Array.from({ length: count }).map(() => <span class="key" />)}
+						</div>
+					))}
+				</div>
+				<div class="board-layer layer-switches" data-layer="switches">
+					{Array.from({ length: 24 }).map(() => <span class="switch-stem" />)}
+				</div>
+				<div class="board-layer layer-pcb" data-layer="pcb"></div>
+				<div class="board-layer layer-foam" data-layer="foam"></div>
+				<div class="board-layer layer-case" data-layer="case"></div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	import './Anatomy.js';
+</script>
