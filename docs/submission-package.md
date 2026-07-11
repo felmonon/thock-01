@@ -8,7 +8,7 @@ The external Google Form has **not** been submitted. Explicit user approval is r
 
 **Email address:** `[USER MUST PROVIDE BEFORE SUBMISSION]`
 
-**Link to live URL:** `[PENDING WEBFLOW CLOUD DEPLOYMENT]`
+**Link to live URL:** https://thock-01.webflow.io/
 
 **Link to public GitHub repository:** https://github.com/felmonon/thock-01
 

@@ -21,6 +21,8 @@ Last updated July 11, 2026.
 | Production build | Pass | `npm run build`: one static route generated successfully. |
 | Console/network | Pass | No page errors, warnings, failed requests, or missing assets in the final production browser pass. |
 | Dependency audit | Accepted | Two low-severity esbuild advisories affect the Windows development server. The available automatic fix requires Astro 7; the static production deployment is not exposed to that dev-server condition. |
+| Webflow Cloud deployment | Pass | Commit `f117892` built in 45s and deployed in 11s to `https://thock-01.webflow.io/`. |
+| Live production smoke test | Pass | The public URL returns the complete experience, navigation, controls, soundprint region, footer replay, and production assets in Chromium. |
 
 ## Lighthouse
 
@@ -81,6 +83,6 @@ The two mobile runs are both recorded to avoid cherry-picking normal Lighthouse 
 
 ## Remaining production checks
 
-- Webflow Cloud URL and build log: pending first deployment.
-- Deployed Safari/WebKit and Firefox verification: pending live URL.
+- Webflow Cloud URL and build log: passed at `https://thock-01.webflow.io/`.
+- Deployed Safari/WebKit and Firefox verification: pending browser availability.
 - Real physical iPhone/Android hardware: cannot be fully emulated; responsive and touch behavior passed browser emulation.

@@ -6,6 +6,10 @@ import Anatomy from '../components/Anatomy/Anatomy.astro';
 import Switches from '../components/Switches/Switches.astro';
 import Soundprint from '../components/Soundprint/Soundprint.astro';
 import Footer from '../components/Footer/Footer.astro';
+
+const site = Astro.site ?? new URL('https://thock-01.webflow.io/');
+const canonicalUrl = new URL(Astro.url.pathname, site);
+const socialImageUrl = new URL('/og-thock.png', site);
 ---
 
 <html lang="en">
@@ -25,7 +29,8 @@ import Footer from '../components/Footer/Footer.astro';
 			content="Disassemble it. Tune the switch. Press any key. A tactile mechanical-keyboard concept built with Astro and GSAP."
 		/>
 		<meta property="og:type" content="website" />
-		<meta property="og:image" content="/og-thock.png" />
+		<meta property="og:url" content={canonicalUrl.href} />
+		<meta property="og:image" content={socialImageUrl.href} />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
 		<meta property="og:image:alt" content="Five oversized THOCK keycaps above a live amber soundprint trace" />
@@ -35,8 +40,9 @@ import Footer from '../components/Footer/Footer.astro';
 			name="twitter:description"
 			content="Type or tap to create and replay your own mechanical-keyboard soundprint."
 		/>
-		<meta name="twitter:image" content="/og-thock.png" />
+		<meta name="twitter:image" content={socialImageUrl.href} />
 		<title>THOCK/01 — The sound your desk has been waiting for</title>
+		<link rel="canonical" href={canonicalUrl.href} />
 		<link
 			rel="preload"
 			href="/fonts/space-grotesk-latin.woff2"

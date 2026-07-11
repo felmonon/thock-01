@@ -4,6 +4,8 @@ An interactive launch page for a fictional 75% mechanical keyboard, built for th
 
 THOCK/01 turns the product itself into the interface: keycaps land with weight, every press becomes a live acoustic force trace, the keyboard separates into five layers while scrolling, and three switch profiles generate their own sound in the browser.
 
+**Live experience:** [thock-01.webflow.io](https://thock-01.webflow.io/)
+
 ![THOCK/01 hero with five physical keycaps and an amber soundprint](docs/screenshots/01-hero.png)
 
 [![Deploy to Webflow](https://webflow.com/img/deploy-dark.svg)](https://webflow.com/dashboard/cloud/deploy?repo=https://github.com/felmonon/thock-01)
@@ -65,9 +67,6 @@ src/
 
 ## Deploy and submit
 
-1. Push this project to a public GitHub repository.
-2. Connect that repository to [Webflow Cloud](https://developers.webflow.com/webflow-cloud/bring-your-own-app).
-3. Verify the live URL on desktop and mobile.
-4. Submit the live URL, repository, and tech stack through the challenge form before the published deadline.
+The public repository is connected to Webflow Cloud and every push to `main` deploys automatically to [thock-01.webflow.io](https://thock-01.webflow.io/). The live URL, repository, and tech stack are packaged in [docs/submission-package.md](docs/submission-package.md) for the challenge form.
 
 The experience sends or stores no personal data. Soundprints exist only in the current page session.
