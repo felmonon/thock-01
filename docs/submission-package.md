@@ -10,7 +10,7 @@ The external Google Form has **not** been submitted. Explicit user approval is r
 
 **Link to live URL:** `[PENDING WEBFLOW CLOUD DEPLOYMENT]`
 
-**Link to public GitHub repository:** `[PENDING PUBLICATION]`
+**Link to public GitHub repository:** https://github.com/felmonon/thock-01
 
 **Tech Stack Used:**
 

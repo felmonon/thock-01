@@ -6,6 +6,8 @@ THOCK/01 turns the product itself into the interface: keycaps land with weight, 
 
 ![THOCK/01 hero with five physical keycaps and an amber soundprint](docs/screenshots/01-hero.png)
 
+[![Deploy to Webflow](https://webflow.com/img/deploy-dark.svg)](https://webflow.com/dashboard/cloud/deploy?repo=https://github.com/felmonon/thock-01)
+
 ## Experience
 
 - **Build a soundprint** — type any key or tap the five hero caps to create a unique live force trace that follows you through the page.
