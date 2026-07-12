@@ -23,14 +23,21 @@ const factoryPreviewPath = buildSoundprintPath(calibrationEvents, 600, 100);
 	<div class="hero-stage">
 		<p class="section-label">Mechanical keyboard, mark one</p>
 		<h1 class="hero-title" aria-label="THOCK interactive keyboard">
-			{letters.map((letter) => (
+			{letters.map((letter, index) => (
 				<button
 					class="keycap"
 					type="button"
 					data-key={letter}
 					aria-label={`Play the ${letter} key and add it to your soundprint`}
 				>
-					<span aria-hidden="true">{letter}</span>
+					<span class="keycap-base" aria-hidden="true"></span>
+					<span class="keycap-shell" aria-hidden="true">
+						<span class="keycap-face">
+							<span class="keycap-index mono">{String(index + 1).padStart(2, '0')}</span>
+							<span class="keycap-legend">{letter}</span>
+							<span class="keycap-axis mono">MX</span>
+						</span>
+					</span>
 				</button>
 			))}
 		</h1>

@@ -1,4 +1,13 @@
 .hero {
+  --keycap-top: #343641;
+  --keycap-face: #202127;
+  --keycap-face-deep: #15161a;
+  --keycap-side: #292b34;
+  --keycap-side-deep: #17181e;
+  --keycap-edge: #4a4d59;
+  --keycap-bed: #0c0d10;
+  --keycap-contact-shadow: rgb(0 0 0 / 0.72);
+  --keycap-specular: rgb(255 255 255 / 0.12);
   position: relative;
   min-height: 100svh;
   display: flex;
@@ -91,44 +100,174 @@
   font-size: clamp(3.5rem, 10.5vw, 9.8rem);
   line-height: 1;
   font-weight: 700;
+  perspective: 90rem;
+  perspective-origin: center 68%;
+  transform: rotateX(2.5deg);
+  transform-origin: center bottom;
 }
 
 .keycap {
+  position: relative;
   min-width: 0;
   aspect-ratio: 0.86;
-  display: grid;
-  place-items: center;
-  padding: 0 0.06em;
-  background: linear-gradient(145deg, var(--color-black-600), var(--surface-1) 62%);
-  border: 1px solid var(--border);
-  border-bottom-color: #30313a;
-  border-radius: 0.09em;
-  box-shadow:
-    inset 0 0.025em 0 rgb(255 255 255 / 0.08),
-    0 0.045em 0 var(--border),
-    0 0.09em 0 #30313a,
-    0 0.16em 0.25em rgb(0 0 0 / 0.5);
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0.1em;
   color: var(--ink);
   transform-origin: center bottom;
+  transform-style: preserve-3d;
   appearance: none;
   font: inherit;
   line-height: 1;
   cursor: pointer;
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.keycap-base,
+.keycap-shell,
+.keycap-face {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+}
+
+.keycap-base {
+  inset: 9% 3% 1%;
+  border: 1px solid rgb(255 255 255 / 0.035);
+  border-radius: 0.09em;
+  background:
+    linear-gradient(180deg, #1d1f26, var(--keycap-bed) 72%),
+    var(--keycap-bed);
+  box-shadow:
+    0 0.035em 0 rgb(255 255 255 / 0.055),
+    0 0.12em 0.16em var(--keycap-contact-shadow),
+    0 0.24em 0.32em rgb(0 0 0 / 0.42);
+  transform: translateY(0.055em) translateZ(-0.04em);
+}
+
+.keycap-shell {
+  inset: 0 0 7%;
+  border: 1px solid var(--keycap-edge);
+  border-bottom-color: var(--keycap-side-deep);
+  border-radius: 0.095em 0.095em 0.12em 0.12em;
+  background:
+    linear-gradient(112deg, var(--keycap-specular), transparent 18%),
+    linear-gradient(
+      180deg,
+      var(--keycap-top) 0%,
+      var(--keycap-side) 68%,
+      #242630 69%,
+      var(--keycap-side-deep) 100%
+    );
+  box-shadow:
+    inset 0 0.018em 0 var(--keycap-specular),
+    inset 0 -0.055em 0 rgb(0 0 0 / 0.24),
+    0 0.025em 0 rgb(255 255 255 / 0.06),
+    0 0.075em 0 #292b34,
+    0 0.13em 0.16em rgb(0 0 0 / 0.48);
+  clip-path: polygon(5% 0, 95% 0, 100% 91%, 95% 100%, 5% 100%, 0 91%);
+  transform-origin: center bottom;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.keycap-shell::before,
+.keycap-shell::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.keycap-shell::before {
+  inset: 4% 5% 15%;
+  border-radius: 0.075em;
+  background: linear-gradient(105deg, rgb(255 255 255 / 0.07), transparent 22%);
+  border-top: 1px solid rgb(255 255 255 / 0.08);
+}
+
+.keycap-shell::after {
+  inset: auto 8% 5%;
+  height: 7%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.055), transparent);
+  filter: blur(0.02em);
+}
+
+.keycap-face {
+  inset: 6% 7% 17%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid #3d3f49;
+  border-top-color: #50535f;
+  border-radius: 0.075em;
+  background:
+    radial-gradient(circle at 34% 18%, rgb(255 255 255 / 0.055), transparent 32%),
+    linear-gradient(145deg, var(--keycap-face), var(--keycap-face-deep) 76%);
+  box-shadow:
+    inset 0 0.018em 0 rgb(255 255 255 / 0.075),
+    inset 0 -0.035em 0 rgb(0 0 0 / 0.34),
+    0 0.025em 0 rgb(0 0 0 / 0.48);
+  transform: translateZ(0.035em) rotateX(-1.5deg);
   transition:
-    color var(--duration-fast) var(--ease-out),
-    border-color var(--duration-fast) var(--ease-out);
+    border-color var(--duration-fast) var(--ease-out),
+    filter var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
 }
 
-.keycap:hover {
-  color: var(--accent);
-  border-color: var(--accent-down);
+.keycap-legend {
+  position: relative;
+  z-index: 1;
+  transform: translateY(2%);
+  text-shadow:
+    0 0.012em 0 rgb(255 255 255 / 0.18),
+    0 0.018em 0 rgb(0 0 0 / 0.85);
 }
 
-.keycap.is-lit {
+.keycap-index,
+.keycap-axis {
+  position: absolute;
+  z-index: 2;
+  color: rgb(236 236 238 / 0.34);
+  font-size: 0.055em;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1;
+}
+
+.keycap-index {
+  top: 12%;
+  left: 10%;
+}
+
+.keycap-axis {
+  right: 10%;
+  bottom: 11%;
+}
+
+.keycap:hover .keycap-face {
   color: var(--accent);
   border-color: var(--accent-down);
-  text-shadow: 0 0 0.35em rgb(255 179 64 / 0.45);
+  filter: brightness(1.08);
+}
+
+.keycap.is-lit .keycap-face {
+  color: var(--accent);
+  border-color: var(--accent-down);
+  box-shadow:
+    inset 0 0.018em 0 rgb(255 255 255 / 0.08),
+    inset 0 -0.035em 0 rgb(0 0 0 / 0.3),
+    0 0 0.08em rgb(255 179 64 / 0.34);
+}
+
+.keycap.is-lit .keycap-legend {
+  text-shadow: 0 0 0.22em rgb(255 179 64 / 0.4);
+}
+
+.keycap:focus-visible {
+  outline-offset: 0.08em;
 }
 
 #hero-subtitle {
@@ -313,11 +452,11 @@
 
 .impact-particle {
   position: absolute;
-  width: 0.32rem;
-  height: 0.32rem;
+  width: 0.2rem;
+  height: 0.2rem;
   background: var(--accent);
-  border-radius: 1px;
-  box-shadow: 0 0 0.65rem rgb(255 179 64 / 0.8);
+  border-radius: 50%;
+  box-shadow: 0 0 0.45rem rgb(255 179 64 / 0.62);
   will-change: transform;
 }
 

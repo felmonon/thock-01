@@ -48,13 +48,29 @@ if (reduceMotion) {
       });
 
       layers.forEach((layer, index) => {
-        const offset = (layers.length - 1 - index) * layerGap;
-        timeline.to(layer, { z: offset, ease: "power1.inOut", duration: 1 }, index * 0.08);
+        const distance = layers.length - 1 - index;
+        const offset = distance * layerGap;
+        timeline.to(
+          layer,
+          {
+            z: offset,
+            y: distance * (compact ? -1.2 : -2),
+            rotationZ: (index - 2) * 0.22,
+            ease: "power2.inOut",
+            duration: 1.15,
+          },
+          index * 0.07,
+        );
       });
 
       timeline.from(
         ".board",
-        { rotateZ: compact ? -22 : -12, ease: "power1.inOut", duration: 1.2 },
+        {
+          rotateX: compact ? 59 : 62,
+          rotateZ: compact ? -22 : -12,
+          ease: "power2.inOut",
+          duration: 1.25,
+        },
         0,
       );
       timeline.to(

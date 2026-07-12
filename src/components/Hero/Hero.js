@@ -16,6 +16,7 @@ import {
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const caps = gsap.utils.toArray(".hero-title .keycap");
+const capShells = caps.map((cap) => cap.querySelector(".keycap-shell"));
 const hint = document.querySelector(".hero-hint");
 const soundToggle = document.querySelector(".sound-toggle");
 const soundState = document.querySelector("[data-sound-state]");
@@ -29,6 +30,7 @@ let hasLiveInput = false;
 
 function finishHeroIntro() {
   gsap.set(caps, { clearProps: "transform,opacity" });
+  gsap.set(capShells, { clearProps: "transform" });
   gsap.set(["#hero-subtitle", hint], { clearProps: "opacity,transform" });
 }
 
@@ -42,15 +44,15 @@ function runFactoryDemo() {
     { drawSVG: "100%", duration: 1.05, ease: "power2.inOut" },
   );
   factoryDemo.fromTo(
-    caps,
+    capShells,
     { y: 0 },
     {
-      y: "0.04em",
-      duration: 0.09,
+      y: "0.055em",
+      duration: 0.055,
       repeat: 1,
       yoyo: true,
       stagger: 0.16,
-      ease: "power2.inOut",
+      ease: "power3.in",
       clearProps: "transform",
     },
     0,
@@ -58,7 +60,7 @@ function runFactoryDemo() {
 }
 
 if (!reduceMotion) {
-  CustomBounce.create("capBounce", { strength: 0.5, squash: 2 });
+  CustomBounce.create("capBounce", { strength: 0.28, squash: 0.35 });
 
   const timeline = gsap.timeline({
     onComplete: () => {
@@ -68,13 +70,15 @@ if (!reduceMotion) {
   });
   timeline.fromTo(
     caps,
-    { y: -120, opacity: 0 },
+    { y: -150, opacity: 0, rotationX: -14, scale: 0.965 },
     {
       y: 0,
       opacity: 1,
+      rotationX: 0,
+      scale: 1,
       ease: "capBounce",
-      duration: 0.9,
-      stagger: 0.09,
+      duration: 1.02,
+      stagger: 0.075,
     },
   );
 
@@ -117,18 +121,24 @@ function pressTitleCap(label) {
   if (!hit) return null;
 
   if (!reduceMotion) {
-    gsap.fromTo(
-      hit,
-      { y: 0, scale: 1 },
-      {
-        y: "0.06em",
-        scale: 0.985,
-        yoyo: true,
-        repeat: 1,
-        duration: 0.09,
-        ease: "power2.in",
-      },
-    );
+    const shell = hit.querySelector(".keycap-shell");
+    gsap.killTweensOf(shell);
+    gsap
+      .timeline({
+        onComplete: () => gsap.set(shell, { clearProps: "transform" }),
+      })
+      .to(shell, {
+        y: "0.078em",
+        scaleY: 0.988,
+        duration: 0.052,
+        ease: "power3.in",
+      })
+      .to(shell, {
+        y: 0,
+        scaleY: 1,
+        duration: 0.13,
+        ease: "power3.out",
+      });
   }
 
   hit.classList.add("is-lit");
@@ -147,7 +157,7 @@ function burstParticles(origin) {
     ? originBounds.top + originBounds.height * 0.62 - layerBounds.top
     : layerBounds.height / 2;
 
-  for (let index = 0; index < 7; index += 1) {
+  for (let index = 0; index < 5; index += 1) {
     const particle = document.createElement("span");
     particle.className = "impact-particle";
     particle.style.left = `${x}px`;
@@ -155,14 +165,14 @@ function burstParticles(origin) {
     impactLayer.appendChild(particle);
 
     gsap.to(particle, {
-      duration: gsap.utils.random(0.55, 0.9),
+      duration: gsap.utils.random(0.38, 0.62),
       opacity: 0,
       scale: gsap.utils.random(0.25, 0.75),
       rotation: gsap.utils.random(-180, 180),
       physics2D: {
-        velocity: gsap.utils.random(80, 210),
+        velocity: gsap.utils.random(55, 135),
         angle: gsap.utils.random(205, 335),
-        gravity: 280,
+        gravity: 360,
       },
       ease: "none",
       onComplete: () => particle.remove(),
@@ -195,7 +205,7 @@ function renderHeroSoundprint(events, animate = false) {
 function registerInput(label, origin, signal = {}) {
   hasLiveInput = true;
   factoryDemo?.kill();
-  gsap.set(caps, { clearProps: "transform" });
+  gsap.set(capShells, { clearProps: "transform" });
   const profile = getSoundProfile();
   playKey(profile);
   recordSoundprint(label, profile, signal);
